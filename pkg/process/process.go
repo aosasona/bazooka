@@ -1,6 +1,7 @@
 package process
 
 import (
+	"errors"
 	"fmt"
 	"os/exec"
 	"strconv"
@@ -25,10 +26,14 @@ func GetProcesses() ([]ps.Process, error) {
 	return processes, nil
 }
 
-func GetProcess(pid int) (Process, error) {
+func GetProcessByPID(pid int) (Process, error) {
 	process, err := ps.FindProcess(pid)
 	if err != nil {
 		return Process{}, err
+	}
+
+	if process == nil {
+		return Process{}, errors.New("process not found")
 	}
 
 	return Process{
@@ -76,6 +81,10 @@ func GetPIDsByName(name string) ([]int, error) {
 	return output, nil
 }
 
-func KillProcess(pid int) error {
+func KillProcess(pid string) error {
+	_, err := exec.Command("kill", "-9", pid).Output()
+	if err != nil {
+		return err
+	}
 	return nil
 }

@@ -5,23 +5,43 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/aosasona/bazooka/internal/process"
+	"github.com/aosasona/bazooka/pkg/process"
 	"github.com/aosasona/bazooka/pkg/response"
 	"github.com/gofiber/fiber/v2"
 )
 
-type GetParams struct {
-	Name string `json:"name"`
-	Pid  string `json:"pid"`
-	Port string `json:"port"`
+func (h *Handler) getProcessByPID(c *fiber.Ctx) error {
+	res := response.New(c)
+
+	var (
+		pid    int
+		params GetParams
+	)
+	if err := c.ParamsParser(&params); err != nil {
+		return res.Error(&response.Data{Err: err, Code: http.StatusUnprocessableEntity})
+	}
+
+	pid, err := strconv.Atoi(params.Pid)
+	if err != nil {
+		return res.Error(&response.Data{Err: err, Code: http.StatusUnprocessableEntity})
+	}
+
+	process, err := process.GetProcessByPID(pid)
+	if err != nil {
+		return res.Error(&response.Data{Message: "Unable to find process", Err: err})
+	}
+
+	return res.Success(&response.Data{
+		Message: fmt.Sprintf("Result for process with PID %v", pid),
+		Data:    process,
+	})
 }
 
 func (h *Handler) getProcessByPort(c *fiber.Ctx) error {
 	res := response.New(c)
 
-	var (
-		params GetParams
-	)
+	var params GetParams
+
 	if err := c.ParamsParser(&params); err != nil {
 		return res.Error(&response.Data{Err: err, Code: http.StatusUnprocessableEntity})
 	}
@@ -32,14 +52,13 @@ func (h *Handler) getProcessByPort(c *fiber.Ctx) error {
 	}
 
 	port, _ := strconv.Atoi(params.Port)
-	data, err := process.GetProcess(pid)
+	data, err := process.GetProcessByPID(pid)
 
 	if err != nil {
 		return res.Error(
 			&response.Data{
 				Err:     err,
 				Message: "Unable to get process",
-				Code:    http.StatusNotFound,
 			},
 		)
 	}
@@ -71,7 +90,7 @@ func (h *Handler) getProcessesByName(c *fiber.Ctx) error {
 
 	for _, pid := range pids {
 
-		data, err := process.GetProcess(pid)
+		data, err := process.GetProcessByPID(pid)
 
 		if err != nil {
 			return res.Error(
@@ -114,28 +133,4 @@ func (h *Handler) getAllProcesses(c *fiber.Ctx) error {
 	}
 
 	return res.Success(&response.Data{Message: "Here you go!", Data: processes})
-}
-
-func (h *Handler) getProcess(c *fiber.Ctx) error {
-	res := response.New(c)
-
-	var (
-		pid    int
-		params GetParams
-	)
-	if err := c.ParamsParser(&params); err != nil {
-		return res.Error(&response.Data{Err: err, Code: http.StatusUnprocessableEntity})
-	}
-
-	pid, err := strconv.Atoi(params.Pid)
-	if err != nil {
-		return res.Error(&response.Data{Err: err, Code: http.StatusUnprocessableEntity})
-	}
-
-	process, err := process.GetProcess(pid)
-	if err != nil {
-		return res.Error(&response.Data{Message: "Unable to find process", Err: err})
-	}
-
-	return res.Success(&response.Data{Message: "Here you go", Data: process})
 }

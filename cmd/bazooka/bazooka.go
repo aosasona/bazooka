@@ -6,6 +6,7 @@ import (
 	"github.com/aosasona/bazooka/internal/handler"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/logger"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 )
 
 type Bazooka struct {
@@ -25,6 +26,7 @@ func (b *Bazooka) Start(port string) error {
 	}
 
 	app.Use(logger.New())
+	app.Use(recover.New())
 
 	endpoints := handler.New(app)
 	endpoints.Serve()
