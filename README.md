@@ -1,1 +1,28 @@
-# Bazooka
+# Bazooka ⚡️
+
+![Bazooka](./assets/screenshot.png)
+
+Bazooka is a simple tool to find and kill processes on your machine by name or port. It provides a simple Web UI to view, search and kill processes without having to use the command line.
+
+## Installation & Usage
+
+Download the latest release from the [releases page](https://github.com/aosasona/bazooka/releases) and extract the zip file. Run the executable file to start the application or run it from the command line like so:
+
+```bash
+./bazooka --port=8080
+```
+
+You can also build the application from source by cloning the repository and running the following commands:
+
+```bash
+go get -u github.com/aosasona/bazooka
+bazooka --port=8080
+```
+
+> By default, Bazooka runs on port 22000. You can change this by passing the `--port` flag.
+
+Once the application is running, you can access the Web UI by visiting `http://localhost:22000` in your browser. You can also change the port by passing the `--port` flag when starting the application.
+
+## Contributing
+
+If you find any bugs or have any suggestions, please feel free to open an issue or submit a pull request.
