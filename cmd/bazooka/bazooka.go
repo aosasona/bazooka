@@ -5,6 +5,7 @@ import (
 
 	"github.com/aosasona/bazooka/internal/handler"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 )
@@ -25,6 +26,9 @@ func (b *Bazooka) Start(port string) error {
 		port = "22000"
 	}
 
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+	}))
 	app.Use(logger.New())
 	app.Use(recover.New())
 

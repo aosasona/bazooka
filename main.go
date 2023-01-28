@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -15,11 +16,8 @@ func main() {
 	app := fiber.New(fiber.Config{
 		AppName: "Bazooka",
 	})
-	port := os.Getenv("PORT")
 
-	if port == "" {
-		port = "22000"
-	}
+	port := flag.String("port", "22000", "Port to run Bazooka on")
 
 	baz := bazooka.New(app)
 
@@ -27,7 +25,7 @@ func main() {
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
 
 	go func() {
-		if err := baz.Start(port); err != nil {
+		if err := baz.Start(*port); err != nil {
 			log.Fatalf("Error starting server: %s", err.Error())
 		}
 	}()
