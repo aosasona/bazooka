@@ -1,7 +1,7 @@
 env_files:
   github_token: ./github_token # for local builds
 brews:
-  - name: stripr
+  - name: bazooka
     homepage: https://github.com/aosasona/homebrew-pkgs
     tap:
       owner: aosasona
@@ -12,7 +12,6 @@ builds:
       - CGO_ENABLED=0
     goos:
       - linux
-      - windows
       - darwin
 archives:
   - replacements:
@@ -22,10 +21,9 @@ archives:
       386: i386
       amd64: x86_64
 checksum:
-  name_template: 'checksums.txt'
+  name_template: "checksums.txt"
 snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
   sort: asc
-
 # vim: set ts=2 sw=2 tw=0 fo=cnqoj
