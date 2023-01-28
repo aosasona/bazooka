@@ -2,7 +2,7 @@
 
 ![Bazooka](./assets/screenshot.png)
 
-Bazooka is a simple tool to find and kill processes on your machine by name or port. It provides a simple Web UI to view, search and kill processes without having to use the command line.
+Bazooka is a simple tool to find and kill processes on your machine by name or port. It provides a Web UI to view, search and kill processes without having to use the command line.
 
 # Installation
 
@@ -44,6 +44,8 @@ bazooka --port=22000
 > By default, Bazooka runs on port 22000. You can change this by passing the `--port` flag.
 
 Once the application is running, you can access the Web UI by visiting `http://localhost:22000` in your browser. You can also change the port by passing the `--port` flag when starting the application.
+
+> NOTE: Bazooka requires root access to kill or even find some processes. You will be prompted for your password when you try to kill a process, you can also run the application with `sudo` to avoid this prompt.
 
 ## Contributing 🔖
 
