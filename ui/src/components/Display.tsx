@@ -11,13 +11,7 @@ interface Props {
   processes: Process[];
   setProcesses: Dispatch<SetStateAction<Process[]>>;
 }
-export default function Display({
-  loading,
-  processes,
-  PIDs,
-  setProcesses,
-  setPIDs,
-}: Props) {
+export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
   const [filteredProcesses, setFilteredProcesses] = useState<Process[] | null>(
     null
   );
@@ -60,7 +54,7 @@ export default function Display({
                 name="filter"
                 type="text"
                 className="bg-transparent w-full focus:outline-none placeholder-zinc-500 px-1"
-                placeholder="Filter..."
+                placeholder="Filter by name..."
                 value={filterQuery}
                 onChange={(e) => filterProcessesByName(e.target?.value || "")}
               />

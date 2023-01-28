@@ -21,7 +21,6 @@ func main() {
 
 	flag.Parse()
 
-	app.Static("/", "./ui/dist")
 	baz := bazooka.New(app)
 
 	done := make(chan os.Signal, 1)

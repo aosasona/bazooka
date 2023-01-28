@@ -33,7 +33,8 @@ func (b *Bazooka) Start(port string) error {
 	app.Use(recover.New())
 
 	endpoints := handler.New(app)
-	endpoints.Serve()
+	endpoints.ServeUI()
+	endpoints.ServeAPI()
 
 	return app.Listen(fmt.Sprintf(":%s", port))
 }

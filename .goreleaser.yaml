@@ -1,11 +1,5 @@
 env_files:
   github_token: ./github_token # for local builds
-brews:
-  - name: bazooka
-    homepage: https://github.com/aosasona/homebrew-pkgs
-    tap:
-      owner: aosasona
-      name: homebrew-pkgs
 builds:
   - env:
       - CGO_ENABLED=0

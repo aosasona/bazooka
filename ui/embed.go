@@ -2,9 +2,21 @@ package ui
 
 import (
 	"embed"
+	"io/fs"
 )
 
 //go:generate yarn
 //go:generate yarn build
-//go:embed all:dist
-var files embed.FS
+//go:embed dist/*
+var UIDir embed.FS
+var (
+	UIFS fs.FS
+)
+
+func init() {
+	var err error
+	UIFS, err = fs.Sub(UIDir, "dist")
+	if err != nil {
+		panic(err)
+	}
+}
