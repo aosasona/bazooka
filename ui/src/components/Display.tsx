@@ -53,12 +53,12 @@ export default function Display({
         </div>
       ) : (
         <Fragment>
-          <div className="bg-zinc-800 px-4 pt-2">
+          <div className="bg-zinc-800 px-4 pt-2.5">
             <div className="w-full flex items-center gap-1">
               <BsFilter size={16} />
               <input
                 name="filter"
-                type="search"
+                type="text"
                 className="bg-transparent w-full focus:outline-none placeholder-zinc-500 px-1"
                 placeholder="Filter..."
                 value={filterQuery}
@@ -77,7 +77,7 @@ export default function Display({
             <div className="text-sm text-zinc-500 font-medium grid grid-cols-3 items-center gap-2 py-2.5">
               <p>Name</p>
               <p>PID</p>
-              <p>Port</p>
+              <p>Parent PID</p>
             </div>
           </div>
           <div className="w-full h-full overflow-scroll pb-24">

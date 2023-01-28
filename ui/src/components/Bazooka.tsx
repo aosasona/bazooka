@@ -3,7 +3,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { get } from "../lib/request";
 import type { Process } from "../lib/types";
 import Display from "./Display";
-import Search from "./Search";
+import SideBar from "./SideBar";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Bazooka() {
@@ -13,20 +13,7 @@ export default function Bazooka() {
 
   useEffect(() => {
     (async () => {
-      try {
-        const data = await get("/processes");
-
-        if (!data.ok) {
-          toast(data.message, { type: "error" });
-          return;
-        }
-
-        setProcesses(data.data);
-      } catch (err) {
-        toast("Something went wrong", { type: "error" });
-      } finally {
-        setLoading(false);
-      }
+      await fetchAllProcesses();
     })();
   }, []);
 
@@ -36,6 +23,25 @@ export default function Bazooka() {
     );
     setProcesses(sortedProcesses);
   }, [processes]);
+
+  const fetchAllProcesses = async () => {
+    try {
+      setLoading(true);
+      const data = await get("/processes");
+
+      if (!data.ok) {
+        toast(data.message, { type: "error" });
+        return;
+      }
+
+      setProcesses(data.data);
+      setPIDs([]);
+    } catch (err) {
+      toast("Something went wrong", { type: "error" });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -47,7 +53,12 @@ export default function Bazooka() {
           setProcesses={setProcesses}
           setPIDs={setPIDs}
         />
-        <Search PIDs={PIDs} setProcesses={setProcesses} />
+        <SideBar
+          PIDs={PIDs}
+          setProcesses={setProcesses}
+          setLoading={setLoading}
+          refresh={fetchAllProcesses}
+        />
       </main>
       <ToastContainer
         theme="dark"

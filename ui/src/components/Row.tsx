@@ -32,7 +32,7 @@ export default function Row({ process, selectedPIDs, handleSelect }: Props) {
         <p>{process.name}</p>
       </div>
       <p className="text-emerald-400">{process.pid}</p>
-      <p>{process.port > 0 ? process.port : "unknown"}</p>
+      <p>{process.ppid}</p>
     </div>
   );
 }
