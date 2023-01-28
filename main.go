@@ -19,6 +19,9 @@ func main() {
 
 	port := flag.String("port", "22000", "Port to run Bazooka on")
 
+	flag.Parse()
+
+	app.Static("/", "./ui/dist")
 	baz := bazooka.New(app)
 
 	done := make(chan os.Signal, 1)
@@ -29,7 +32,7 @@ func main() {
 			log.Fatalf("Error starting server: %s", err.Error())
 		}
 	}()
-	log.Printf("Running Bazooka on %s", fmt.Sprintf("http://localhost:%v", port))
+	log.Printf("Running Bazooka on %s", fmt.Sprintf("http://localhost:%v", *port))
 
 	<-done
 	if err := baz.Stop(); err != nil {

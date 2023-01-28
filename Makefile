@@ -1,11 +1,7 @@
-.PHONY: build-client
-build-client:
-	@cd ui && yarn build
-
 .PHONY: build
 build:
-	@build-client
-	@go build -o build/rabbid
+	go generate ./...
+	go build -o build/bazooka
 
 start-dev:
 	@echo "Starting dev server"

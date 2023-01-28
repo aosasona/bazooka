@@ -66,7 +66,7 @@ func (h *Handler) getProcessByPort(c *fiber.Ctx) error {
 	data.Port = port
 	return res.Success(
 		&response.Data{
-			Message: fmt.Sprintf("Result for process running on port %v", port),
+			Message: fmt.Sprintf("Found process running on port %v", port),
 			Data:    data,
 		},
 	)

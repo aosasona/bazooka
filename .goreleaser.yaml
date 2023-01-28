@@ -1,0 +1,31 @@
+env_files:
+  github_token: ./github_token # for local builds
+brews:
+  - name: stripr
+    homepage: https://github.com/aosasona/homebrew-pkgs
+    tap:
+      owner: aosasona
+      name: homebrew-pkgs
+      token: "{{ .Env.TAP_GITHUB_TOKEN }}"
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - windows
+      - darwin
+archives:
+  - replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+checksum:
+  name_template: 'checksums.txt'
+snapshot:
+  name_template: "{{ incpatch .Version }}-next"
+changelog:
+  sort: asc
+
+# vim: set ts=2 sw=2 tw=0 fo=cnqoj
