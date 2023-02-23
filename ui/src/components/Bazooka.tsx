@@ -22,13 +22,6 @@ export default function Bazooka() {
     })();
   }, []);
 
-  useMemo(() => {
-    const sortedProcesses = processes.sort((a, b) =>
-      a.name == b.name ? 0 : a.name > b.name ? 1 : -1
-    );
-    setProcesses(sortedProcesses);
-  }, [processes]);
-
   const fetchAllProcesses = async () => {
     try {
       setLoading(true);

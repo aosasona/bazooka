@@ -12,7 +12,7 @@ type Data struct {
 	Ok      bool                   `json:"ok"`
 	Code    int                    `json:"code"`
 	Message string                 `json:"message"`
-	Data    any                    `json:"data"`
+	Data    any                    `json:"data,omitempty"`
 	Meta    map[string]interface{} `json:"meta"`
 	Err     error                  `json:"-"`
 }

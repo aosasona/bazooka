@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"sort"
 	"strconv"
 
 	"github.com/aosasona/bazooka/pkg/process"
@@ -116,7 +117,7 @@ func (h *Handler) getProcessesByName(c *fiber.Ctx) error {
 func (h *Handler) getAllProcesses(c *fiber.Ctx) error {
 	res := response.New(c)
 
-	var processes []process.Process
+	var processes process.Processes
 
 	rawProcesses, err := process.GetProcesses()
 	if err != nil {
@@ -131,6 +132,8 @@ func (h *Handler) getAllProcesses(c *fiber.Ctx) error {
 			process.Process{Name: proc.Executable(), PID: pid, PPID: ppid},
 		)
 	}
+
+	sort.Sort(processes)
 
 	return res.Success(&response.Data{Message: "Here you go!", Data: processes})
 }
