@@ -4,6 +4,11 @@ import { get } from "../lib/request";
 import type { Process } from "../lib/types";
 import Display from "./Display";
 import SideBar from "./SideBar";
+import {
+  useQuery,
+  QueryClient,
+  QueryClientProvider,
+} from "@tanstack/react-query";
 import "react-toastify/dist/ReactToastify.css";
 
 export default function Bazooka() {

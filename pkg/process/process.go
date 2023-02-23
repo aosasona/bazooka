@@ -17,6 +17,23 @@ type Process struct {
 	Port int    `json:"port"`
 }
 
+type Processes []Process
+
+/* sort interface implementation for Processes struct */
+func (p Processes) Len() int {
+	return len(p)
+}
+
+func (p Processes) Less(x, y int) bool {
+	return p[x].Name < p[y].Name
+}
+
+func (p Processes) Swap(x, y int) {
+	p[x], p[y] = p[y], p[x]
+}
+
+/* Process methods */
+
 func GetProcesses() ([]ps.Process, error) {
 	processes, err := ps.Processes()
 	if err != nil {
