@@ -1,40 +1,23 @@
 import { useState } from "react";
-import { ToastContainer } from "react-toastify";
 import Display from "../components/Display";
 import SideBar from "../components/SideBar";
-import {
-  useQuery,
-  QueryClient,
-  QueryClientProvider,
-} from "@tanstack/react-query";
+import { useQuery, QueryClient } from "@tanstack/react-query";
 import "react-toastify/dist/ReactToastify.css";
 import { fetchProcesses } from "../queries/process/fetch";
 import type { Process } from "../lib/types";
 import { onError } from "../lib/error";
 import { QueryKeys } from "../queries/keys";
+import EntryPoint from "./EntryPoint";
 
-interface BazookaProps {
+interface DashboardProps {
   queryClient: QueryClient;
 }
 
-export default function EntryPoint() {
-  const queryClient = new QueryClient();
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Bazooka queryClient={queryClient} />
-      <ToastContainer
-        theme="dark"
-        position="top-right"
-        autoClose={5000}
-        hideProgressBar
-        draggable
-        closeOnClick
-      />
-    </QueryClientProvider>
-  );
+export default function Dashboard() {
+  return <EntryPoint Component={DashboardComponent} />;
 }
 
-export function Bazooka({ queryClient }: BazookaProps) {
+export function DashboardComponent({ queryClient }: DashboardProps) {
   const [PIDs, setPIDs] = useState<number[]>([]);
 
   const processesQuery = useQuery({
