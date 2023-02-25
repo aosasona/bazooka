@@ -1,12 +1,16 @@
 import axios from "axios";
 
-const BASE_API_URL = (import.meta.env?.PUBLIC_API_URL || "") + "/api/v1";
+interface APIResponse {
+  ok: boolean;
+  message: string;
+  data: any | null;
+}
 
 export const request = axios.create({
   baseURL: (import.meta.env?.PUBLIC_API_URL || "") + "/api/v1",
 });
 
-export async function get(url: string) {
+export async function get(url: string): Promise<APIResponse> {
   try {
     const { data } = await request.get(url);
     return { ok: true, message: data?.message, data: data?.data };
@@ -19,7 +23,7 @@ export async function get(url: string) {
   }
 }
 
-export async function post(url: string, body: any) {
+export async function post(url: string, body: any): Promise<APIResponse> {
   try {
     const { data } = await request.post(url, body);
     return { ok: true, message: data?.message, data: data?.data };

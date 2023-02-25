@@ -1,4 +1,4 @@
-import { Dispatch, Fragment, SetStateAction, useState } from "react";
+import { Fragment, useState } from "react";
 import type { Process } from "../lib/types";
 import { BsFilter } from "react-icons/bs/index";
 import Loading from "./Loading";
@@ -9,7 +9,6 @@ interface Props {
   PIDs: number[];
   setPIDs: (pid: number[]) => void;
   processes: Process[];
-  setProcesses: Dispatch<SetStateAction<Process[]>>;
 }
 export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
   const [filteredProcesses, setFilteredProcesses] = useState<Process[] | null>(
@@ -40,20 +39,20 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
   };
 
   return (
-    <section className="w-full md:w-[70%] h-[75vh] border border-zinc-800 rounded-lg overflow-hidden">
+    <section className="w-full md:w-[70%] h-[75vh] border border-neutral-900 rounded-lg overflow-hidden">
       {loading ? (
         <div className="w-full h-full flex items-center justify-center">
           <Loading />
         </div>
       ) : (
         <Fragment>
-          <div className="bg-zinc-800 px-4 pt-2.5">
+          <div className="bg-neutral-900 px-4 pt-2.5">
             <div className="w-full flex items-center gap-1">
               <BsFilter size={16} />
               <input
                 name="filter"
                 type="text"
-                className="bg-transparent w-full focus:outline-none placeholder-zinc-500 px-1"
+                className="bg-transparent w-full focus:outline-none placeholder-neutral-500 px-1"
                 placeholder="Filter by name..."
                 value={filterQuery}
                 onChange={(e) => filterProcessesByName(e.target?.value || "")}
@@ -68,7 +67,7 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
                 </button>
               )}
             </div>
-            <div className="text-sm text-zinc-500 font-medium grid grid-cols-3 items-center gap-2 py-2.5">
+            <div className="text-sm text-neutral-500 font-medium grid grid-cols-3 items-center gap-2 py-2.5">
               <p>Name</p>
               <p>PID</p>
               <p>Parent PID</p>
@@ -87,7 +86,7 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
                 ))}
               </Fragment>
             ) : (
-              <p className="text-zinc-600 p-2">No processes</p>
+              <p className="text-neutral-600 p-2">No processes</p>
             )}
           </div>
         </Fragment>

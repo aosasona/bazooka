@@ -11,35 +11,17 @@ import "react-toastify/dist/ReactToastify.css";
 import { fetchProcesses } from "../queries/process/fetch";
 import type { Process } from "../lib/types";
 import { onError } from "../lib/error";
+import { QueryKeys } from "../queries/keys";
 
-export default function Bazooka() {
-  const [processes, setProcesses] = useState<Process[]>([]);
-  const [PIDs, setPIDs] = useState<number[]>([]);
+interface BazookaProps {
+  queryClient: QueryClient;
+}
 
+export default function EntryPoint() {
   const queryClient = new QueryClient();
-  const { isLoading, refetch } = useQuery({
-    queryKey: ["processes"],
-    queryFn: fetchProcesses,
-    onSuccess: (data) => {
-      if (data) {
-        setProcesses(data);
-      }
-    },
-    onError,
-  });
-
   return (
     <QueryClientProvider client={queryClient}>
-      <main className="w-full flex flex-col-reverse md:flex-row gap-6">
-        <Display
-          loading={isLoading}
-          PIDs={PIDs}
-          processes={processes}
-          setProcesses={setProcesses}
-          setPIDs={setPIDs}
-        />
-        <SideBar PIDs={PIDs} refetch={refetch} queryClient={queryClient} />
-      </main>
+      <Bazooka queryClient={queryClient} />
       <ToastContainer
         theme="dark"
         position="top-right"
@@ -49,5 +31,27 @@ export default function Bazooka() {
         closeOnClick
       />
     </QueryClientProvider>
+  );
+}
+
+export function Bazooka({ queryClient }: BazookaProps) {
+  const [PIDs, setPIDs] = useState<number[]>([]);
+
+  const processesQuery = useQuery({
+    queryKey: [QueryKeys.PROCESSES],
+    queryFn: fetchProcesses,
+    onError,
+  });
+
+  return (
+    <main className="w-full flex flex-col-reverse md:flex-row gap-6">
+      <Display
+        loading={processesQuery.isLoading || processesQuery.isFetching}
+        PIDs={PIDs}
+        processes={processesQuery.data as Process[]}
+        setPIDs={setPIDs}
+      />
+      <SideBar PIDs={PIDs} queryClient={queryClient} />
+    </main>
   );
 }

@@ -13,6 +13,9 @@
   "dependencies": {
     "@astrojs/react": "^2.0.1",
     "@astrojs/tailwind": "^3.0.0",
+    "@egoist/tailwindcss-icons": "^1.0.7",
+    "@iconify-json/ion": "^1.1.8",
+    "@iconify-json/mdi": "^1.1.47",
     "@tanstack/react-query": "^4.24.10",
     "@types/react": "^18.0.27",
     "@types/react-dom": "^18.0.10",
