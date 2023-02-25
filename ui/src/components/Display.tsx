@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import type { Process } from "../lib/types";
 import { BsFilter } from "react-icons/bs/index";
 import Loading from "./Loading";
@@ -15,6 +15,13 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
     null
   );
   const [filterQuery, setFilterQuery] = useState("");
+
+  useEffect(() => {
+    if (processes != null) {
+      setFilteredProcesses(null);
+      setFilterQuery("");
+    }
+  }, [processes]);
 
   const toggleRowSelect = (pid: number) => {
     if (PIDs.includes(pid)) {
