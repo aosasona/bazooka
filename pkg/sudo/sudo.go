@@ -1,6 +1,9 @@
 package sudo
 
+import "os"
+
 func HasSudoPermissions() bool {
-	// TODO: perform actual check
-	return true
+	euid := os.Geteuid()
+
+	return euid == 0
 }
