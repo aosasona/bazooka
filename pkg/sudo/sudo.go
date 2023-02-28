@@ -2,7 +2,7 @@ package sudo
 
 import "os"
 
-func HasSudoPermissions() bool {
+func IsRunningAsSudo() bool {
 	euid := os.Geteuid()
 
 	return euid == 0

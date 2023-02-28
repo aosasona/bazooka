@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/aosasona/bazooka/internal/handler"
+	"github.com/aosasona/bazooka/pkg/sudo"
+	"github.com/charmbracelet/log"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
@@ -35,6 +37,12 @@ func (b *Bazooka) Start(port string) error {
 	endpoints := handler.New(app)
 	endpoints.ServeUI()
 	endpoints.ServeAPI()
+
+	if !sudo.IsRunningAsSudo() {
+		log.Warn(
+			"Bazooka requires root permissions to function properly, please restart the program with sudo or it would require you to type in your password at a later time and leave requests hanging (not recommended)",
+		)
+	}
 
 	return app.Listen(fmt.Sprintf(":%s", port))
 }

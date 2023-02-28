@@ -38,10 +38,10 @@ This will create a `bazooka` executable file in the `/build` directory. You can 
 Run the application with the following command:
 
 ```bash
-bazooka --port=22000
+bazooka -port 8080
 ```
 
-> By default, Bazooka runs on port 22000. You can change this by passing the `--port` flag.
+> By default, Bazooka runs on port 22000. You can change this by passing the `-port` flag.
 
 Once the application is running, you can access the Web UI by visiting `http://localhost:22000` in your browser. You can also change the port by passing the `--port` flag when starting the application.
 

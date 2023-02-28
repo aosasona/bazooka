@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
 	"github.com/aosasona/bazooka/cmd/bazooka"
+	"github.com/charmbracelet/log"
 	"github.com/goccy/go-json"
 	"github.com/gofiber/fiber/v2"
 )
@@ -32,15 +32,16 @@ func main() {
 
 	go func() {
 		if err := baz.Start(*port); err != nil {
-			log.Fatalf("Error starting server: %s", err.Error())
+			log.Error(fmt.Sprintf("Error starting server: %s", err.Error()))
 		}
 	}()
-	log.Printf("Running Bazooka on %s", fmt.Sprintf("http://localhost:%v", *port))
+	log.Info(fmt.Sprintf("Starting Bazooka on http://localhost:%v", *port))
 
 	<-done
+
 	if err := baz.Stop(); err != nil {
-		log.Printf("Failed to kill server: %s", err.Error())
+		log.Error("Failed to kill server: %s", err.Error())
 	}
-	log.Print("Stopped Bazooka successfully")
+	log.Error("Stopped Bazooka successfully")
 
 }

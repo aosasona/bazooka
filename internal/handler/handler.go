@@ -35,13 +35,14 @@ func (h *Handler) ServeAPI() {
 	r.Get("processes/pid/:pid", h.getProcessByPID)
 	r.Get("processes/port/:port", h.getProcessByPort)
 	r.Get("processes/name/:name", h.getProcessesByName)
+	r.Get("resources", h.getResources)
 	r.Post("processes/kill", h.killProcesses)
 }
 
 func (h *Handler) ServeUI() {
 	h.app.Use("/", filesystem.New(filesystem.Config{
 		Root:       http.FS(ui.UIDir),
-		Browse:     true,
+		Browse:     false,
 		PathPrefix: "dist",
 	}))
 }
