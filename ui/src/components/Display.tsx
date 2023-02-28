@@ -46,20 +46,20 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
   };
 
   return (
-    <section className="w-full md:w-[70%] h-[75vh] border border-neutral-900 rounded-lg overflow-hidden">
+    <section className="relative w-full md:w-[70%] h-[75vh] border border-neutral-900 rounded-lg overflow-hidden">
       {loading ? (
         <div className="w-full h-full flex items-center justify-center">
           <Loading />
         </div>
       ) : (
         <Fragment>
-          <div className="bg-neutral-900 px-4 pt-2.5">
-            <div className="w-full flex items-center gap-1">
-              <BsFilter size={16} />
+          <div className="absolute top-0 left-0 w-full bg-neutral-900/50 backdrop-blur-md border-b border-b-neutral-900">
+            <div className="w-full flex items-center gap-1 px-4 py-3">
+              <BsFilter size={18} className="text-neutral-600" />
               <input
                 name="filter"
                 type="text"
-                className="bg-transparent w-full focus:outline-none placeholder-neutral-500 px-1"
+                className="bg-transparent w-full focus:outline-none placeholder-neutral-600 px-1"
                 placeholder="Filter by name..."
                 value={filterQuery}
                 onChange={(e) => filterProcessesByName(e.target?.value || "")}
@@ -74,13 +74,13 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
                 </button>
               )}
             </div>
-            <div className="text-sm text-neutral-500 font-medium grid grid-cols-3 items-center gap-2 py-2.5">
+            <div className="display-title">
               <p>Name</p>
               <p>PID</p>
               <p>Parent PID</p>
             </div>
           </div>
-          <div className="w-full h-full overflow-scroll pb-24">
+          <div className="w-full h-full pt-24 pb-8 overflow-y-scroll">
             {(filteredProcesses || processes).length > 0 ? (
               <Fragment>
                 {(filteredProcesses || processes).map((process, idx) => (
@@ -93,7 +93,9 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
                 ))}
               </Fragment>
             ) : (
-              <p className="text-neutral-600 p-2">No processes</p>
+              <div className="w-full h-full flex flex-col items-center justify-center">
+                <p className="text-red-500 p-2">No match found.</p>
+              </div>
             )}
           </div>
         </Fragment>

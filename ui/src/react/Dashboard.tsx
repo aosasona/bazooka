@@ -13,7 +13,7 @@ interface DashboardProps {
   queryClient: QueryClient;
 }
 
-export default function Dashboard() {
+export default function Dashboard(props: { "client:load": boolean }) {
   return <EntryPoint Component={DashboardComponent} />;
 }
 
@@ -24,6 +24,7 @@ export function DashboardComponent({ queryClient }: DashboardProps) {
     queryKey: [QueryKeys.PROCESSES],
     queryFn: fetchProcesses,
     onError,
+    refetchOnWindowFocus: false,
   });
 
   return (

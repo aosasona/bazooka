@@ -18,7 +18,7 @@ export default function Row({ process, selectedPIDs, handleSelect }: Props) {
     (isSelected ? " bg-emerald-400 bg-opacity-20" : " bg-zinc-800");
 
   return (
-    <div className="bg-transparent text-sm text-zinc-500 font-medium border-b border-b-zinc-800 grid grid-cols-3 items-center gap-2 px-1 py-3 mx-2">
+    <div className="bg-transparent text-sm text-zinc-500 font-medium border-b border-b-zinc-800 grid grid-cols-2 sm:grid-cols-3 items-center gap-2 px-1 py-3 mx-2">
       <div className="flex items-center gap-2">
         <button onClick={() => handleSelect(process.pid)}>
           <div className={checkboxStyle}>
@@ -31,8 +31,8 @@ export default function Row({ process, selectedPIDs, handleSelect }: Props) {
         </button>
         <p>{process.name}</p>
       </div>
-      <p className="text-emerald-400">{process.pid}</p>
-      <p>{process.ppid}</p>
+      <p className="text-emerald-400 px-4">{process.pid}</p>
+      <p className="hidden sm:block px-4">{process.ppid}</p>
     </div>
   );
 }
