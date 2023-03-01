@@ -2,7 +2,7 @@
 
 ![Bazooka](./assets/screenshot.png)
 
-Bazooka is a simple tool to find and kill processes on your machine by name or port. It provides a Web UI to view, search and kill processes without having to use the command line.
+Bazooka is a simple tool to find and kill processes on your machine by name or port. It provides a Web UI to view, find and kill processes without having to use the command line all in one binary.
 
 # Installation
 

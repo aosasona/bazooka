@@ -1,0 +1,8 @@
+.goreleaser.yaml
+.DS_Store
+.air.toml
+github_token
+/tmp
+/build
+.git
+/dist
