@@ -35,13 +35,13 @@ func main() {
 			log.Error(fmt.Sprintf("Error starting server: %s", err.Error()))
 		}
 	}()
-	log.Info(fmt.Sprintf("Starting Bazooka on http://localhost:%v", *port))
+	log.Info(fmt.Sprintf("Starting Bazooka on port %v", *port))
 
 	<-done
 
 	if err := baz.Stop(); err != nil {
 		log.Error("Failed to kill server: %s", err.Error())
 	}
-	log.Error("Stopped Bazooka successfully")
+	log.Info("Stopped Bazooka successfully")
 
 }

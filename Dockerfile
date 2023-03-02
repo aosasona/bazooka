@@ -15,4 +15,7 @@ RUN CGO_ENABLED=0 make build TARGET_DIR=/go/bin/app
 
 FROM gcr.io/distroless/static-debian11
 COPY --from=base /go/bin/app /
+
+EXPOSE 22000
+
 CMD ["/app"]

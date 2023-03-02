@@ -44,7 +44,7 @@ func (b *Bazooka) Start(port string) error {
 		)
 	}
 
-	return app.Listen(fmt.Sprintf(":%s", port))
+	return app.Listen(fmt.Sprintf("0.0.0.0:%s", port))
 }
 
 func (b *Bazooka) Stop() error {

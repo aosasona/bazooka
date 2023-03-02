@@ -1,8 +1,8 @@
-# Bazooka ⚡️
+# Bazooka 💣
 
 ![Bazooka](./assets/screenshot.png)
 
-Bazooka is a simple tool to find and kill processes on your machine by name or port. It provides a Web UI to view, find and kill processes without having to use the command line all in one binary.
+Bazooka is a simple tool in Go to find and kill processes on your machine by name or port. It provides a Web UI to view, find and kill processes without having to use the command line all in one binary.
 
 # Installation
 
@@ -21,6 +21,14 @@ Download the latest release from the [releases page](https://github.com/aosasona
 
 ```bash
 cd bazooka && ./bazooka --port=8080
+```
+## Docker
+> According to the Docker documentation: `The host networking driver only works on Linux hosts, and is not supported on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server. So this image is only guaranteed to work on Linux servers/machines.`
+
+Use this command to run the latest version of Bazooka image using Docker in detached mode (obviously). Replace `-d` with `-it` to see logs in real-time (quitting this will also stop the program)
+```bash
+docker pull trulyao/bazooka@latest # optional
+docker run -d --pid=host --net=host trulyao/bazooka@latest
 ```
 
 ## Build from source
@@ -49,4 +57,4 @@ Once the application is running, you can access the Web UI by visiting `http://l
 
 ## Contributing 🔖
 
-If you find any bugs or have any suggestions, please feel free to open an issue or submit a pull request.
+If you find any bugs or have any suggestions, please feel free to open an issue or submit a pull request. To see other things I intend to ship for this, check out the [issues](https://github.com/aosasona/bazooka/issues) page.
