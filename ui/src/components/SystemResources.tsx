@@ -5,7 +5,7 @@ import { fetchSystemResources } from "../queries/resources/fetch";
 import { FiCpu } from "react-icons/fi/index";
 import { FaMemory } from "react-icons/fa/index";
 import type { IconType } from "react-icons";
-import type { ReactNode } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Loading from "./Loading";
 
 export default function SystemResources() {
@@ -17,6 +17,14 @@ export default function SystemResources() {
     refetchInterval: 2500,
   });
   const { data } = resourcesQuery;
+  const [supportsResources, setSupportsResources] = useState(false);
+
+  useEffect(() => {
+    const hasNullorUndefined = Object.values(data || {}).some(
+      (val) => val == null || val == undefined
+    );
+    setSupportsResources(!hasNullorUndefined);
+  }, [data]);
 
   if (resourcesQuery.isInitialLoading) {
     return (
@@ -26,14 +34,27 @@ export default function SystemResources() {
     );
   }
 
+  if (!supportsResources) {
+    return (
+      <div className="w-full aspect-video flex items-center justify-center">
+        <p className="text-neutral-500">
+          Oops, your machine is not supported (yet)...
+        </p>
+      </div>
+    );
+  }
+
   return (
     <section className="w-full flex flex-col gap-6">
       <section>
         <StatsHeader Icon={FiCpu} title="CPU" />
         <StatsContainer>
-          <Stat title="Cores (physical)" data={data?.cpu.physical_cores} />
-          <Stat title="Cores (logical)" data={data?.cpu.logical_cores} />
-          <Stat title="Usage" data={`${data?.cpu.total_usage}%`} isFull />
+          <Stat
+            title="Cores (physical)"
+            data={data?.cpu?.physical_cores || 0}
+          />
+          <Stat title="Cores (logical)" data={data?.cpu?.logical_cores || 0} />
+          <Stat title="Usage" data={`${data?.cpu?.total_usage || 0}%`} isFull />
         </StatsContainer>
       </section>
 
@@ -42,21 +63,24 @@ export default function SystemResources() {
         <StatsContainer>
           <Stat
             title="Total Memory"
-            data={`${data?.memory.total.raw}GB`}
+            data={`${data?.memory?.total?.raw || 0}GB`}
             isFull
           />
 
           <Stat
             title="Available - GB"
-            data={`${data?.memory.available.raw}GB`}
+            data={`${data?.memory?.available?.raw || 0}GB`}
           />
           <Stat
             title="Available - %"
-            data={`${data?.memory.available.percent}%`}
+            data={`${data?.memory?.available?.percent || 0}%`}
           />
 
-          <Stat title="Used - GB" data={`${data?.memory.used.raw}GB`} />
-          <Stat title="Used - %" data={`${data?.memory.used.percent}%`} />
+          <Stat title="Used - GB" data={`${data?.memory?.used?.raw || 0}GB`} />
+          <Stat
+            title="Used - %"
+            data={`${data?.memory?.used?.percent || 0}%`}
+          />
         </StatsContainer>
       </section>
     </section>
