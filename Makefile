@@ -8,3 +8,9 @@ start-dev:
 	@echo "Starting dev server"
 	@air -c ./.air.toml
 	@echo "Dev server started"
+
+docker-release:
+	@echo "Building new image..."
+	docker build -t trulyao/bazooka:latest .
+	@echo "Pushing to Docker Hub now"
+	docker push trulyao/bazooka
