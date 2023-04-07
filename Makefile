@@ -10,7 +10,7 @@ start-dev:
 	@echo "Dev server started"
 
 docker-release:
-	@echo "Building new image..."
-	docker build -t trulyao/bazooka:latest .
-	@echo "Pushing to Docker Hub now"
-	docker push trulyao/bazooka
+	echo "Building new image..."
+	@docker build -t trulyao/bazooka:latest .
+	echo "Pushing to Docker Hub now"
+	docker push trulyao/bazooka && echo "Latest image released!"

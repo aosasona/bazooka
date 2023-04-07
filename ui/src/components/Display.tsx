@@ -11,9 +11,7 @@ interface Props {
   processes: Process[];
 }
 export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
-  const [filteredProcesses, setFilteredProcesses] = useState<Process[] | null>(
-    null
-  );
+  const [filteredProcesses, setFilteredProcesses] = useState<Process[] | null>(null);
   const [filterQuery, setFilterQuery] = useState("");
 
   useEffect(() => {
@@ -55,7 +53,10 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
         <Fragment>
           <div className="absolute top-0 left-0 w-full bg-neutral-900/50 backdrop-blur-md border-b border-b-neutral-900">
             <div className="w-full flex items-center gap-1 px-4 py-3">
-              <BsFilter size={18} className="text-neutral-600" />
+              <div className="flex items-center space-x-1">
+                <BsFilter size={18} className="text-neutral-600" />
+                <p title="Total number of processes displayed currently" className="text-xs text-emerald-400 font-bold select-none">{(filteredProcesses || processes)?.length}</p>
+              </div>
               <input
                 name="filter"
                 type="text"
@@ -65,11 +66,7 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
                 onChange={(e) => filterProcessesByName(e.target?.value || "")}
               />
               {filteredProcesses && (
-                <button
-                  title="Clear filter and selected items"
-                  className="text-red-500 text-xs font-medium px-2 py-1"
-                  onClick={() => filterProcessesByName("")}
-                >
+                <button title="Clear filter and selected items" className="text-red-500 text-xs font-medium px-2 py-1" onClick={() => filterProcessesByName("")}>
                   Clear
                 </button>
               )}
@@ -84,12 +81,7 @@ export default function Display({ loading, processes, PIDs, setPIDs }: Props) {
             {(filteredProcesses || processes).length > 0 ? (
               <Fragment>
                 {(filteredProcesses || processes).map((process, idx) => (
-                  <Row
-                    key={idx}
-                    process={process}
-                    selectedPIDs={PIDs}
-                    handleSelect={toggleRowSelect}
-                  />
+                  <Row key={idx} process={process} selectedPIDs={PIDs} handleSelect={toggleRowSelect} />
                 ))}
               </Fragment>
             ) : (

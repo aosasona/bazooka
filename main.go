@@ -21,11 +21,15 @@ func main() {
 		JSONDecoder:           json.Unmarshal,
 	})
 
-	port := flag.String("port", "22000", "Port to run Bazooka on")
+	port := flag.String("port", "22000", "port to run Bazooka on")
 
 	flag.Parse()
 
-	baz := bazooka.New(app)
+	baz, err := bazooka.New(app)
+	if err != nil {
+		log.Error(fmt.Sprintf("Failed to start Bazooka: %s", err.Error()))
+		os.Exit(1)
+	}
 
 	done := make(chan os.Signal, 1)
 	signal.Notify(done, os.Interrupt, syscall.SIGINT, syscall.SIGTERM)
@@ -42,6 +46,5 @@ func main() {
 	if err := baz.Stop(); err != nil {
 		log.Error("Failed to kill server: %s", err.Error())
 	}
-	log.Info("Stopped Bazooka successfully")
-
+	log.Info("-> Stopped Bazooka")
 }

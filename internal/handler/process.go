@@ -11,7 +11,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func (h *Handler) getProcessByPID(c *fiber.Ctx) error {
+func (h *handler) getProcessByPID(c *fiber.Ctx) error {
 	res := response.New(c)
 
 	var (
@@ -38,7 +38,7 @@ func (h *Handler) getProcessByPID(c *fiber.Ctx) error {
 	})
 }
 
-func (h *Handler) getProcessByPort(c *fiber.Ctx) error {
+func (h *handler) getProcessByPort(c *fiber.Ctx) error {
 	res := response.New(c)
 
 	var params GetParams
@@ -73,7 +73,7 @@ func (h *Handler) getProcessByPort(c *fiber.Ctx) error {
 	)
 }
 
-func (h *Handler) getProcessesByName(c *fiber.Ctx) error {
+func (h *handler) getProcessesByName(c *fiber.Ctx) error {
 	res := response.New(c)
 
 	var (
@@ -114,7 +114,7 @@ func (h *Handler) getProcessesByName(c *fiber.Ctx) error {
 	)
 }
 
-func (h *Handler) getAllProcesses(c *fiber.Ctx) error {
+func (h *handler) getAllProcesses(c *fiber.Ctx) error {
 	res := response.New(c)
 
 	var processes process.Processes

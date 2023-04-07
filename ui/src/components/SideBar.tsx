@@ -58,10 +58,7 @@ export default function SideBar({ PIDs, queryClient }: Props) {
     <section className="w-full md:w-[30%] flex flex-col gap-4 md:-mt-10">
       <section>
         <div className="flex justify-end">
-          <button
-            className="bg-neutral-900/50 border border-neutral-900 rounded-md py-2 px-4 mb-3"
-            onClick={() => refetch()}
-          >
+          <button className="bg-neutral-900/50 border border-neutral-900 hover:opacity-60 transition-all rounded-md py-2 px-4 mb-3" onClick={() => refetch()}>
             <FiRefreshCw size={12} className="text-neutral-500" />
           </button>
         </div>

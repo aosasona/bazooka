@@ -10,7 +10,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
-func (h *Handler) killProcesses(c *fiber.Ctx) error {
+func (h *handler) killProcesses(c *fiber.Ctx) error {
 	res := response.New(c)
 
 	var body PostBody

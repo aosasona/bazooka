@@ -6,6 +6,7 @@ require (
 	github.com/charmbracelet/log v0.1.1
 	github.com/goccy/go-json v0.10.0
 	github.com/gofiber/fiber/v2 v2.41.0
+	github.com/joho/godotenv v1.5.1
 	github.com/mitchellh/go-ps v1.0.0
 	github.com/shirou/gopsutil/v3 v3.23.1
 )

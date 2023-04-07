@@ -35,6 +35,9 @@ const { title } = Astro.props;
 		font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
 			DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 	}
+	button {
+		@apply cursor-pointer hover:opacity-60 transition-all;
+	}
 	::-webkit-scrollbar {
 		width: 8px;
 	}
@@ -42,7 +45,7 @@ const { title } = Astro.props;
 		@apply w-full border-t border-t-neutral-900 text-sm text-neutral-500 font-medium grid grid-cols-2 sm:grid-cols-3 items-center;
 	}
 	.display-title p {
-		@apply border-r border-r-neutral-900 py-2.5 px-3;
+		@apply border-r border-r-neutral-900 select-none py-2.5 px-3;
 	}
 
 	.display-title p:last-child {
