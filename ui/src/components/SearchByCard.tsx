@@ -13,10 +13,7 @@ export default function SearchByCard({
   selected,
   handleClick,
 }: Props) {
-  const cardClass =
-    selected === value
-      ? "w-full bg-zinc-800 border-0"
-      : "w-full text-zinc-600 border border-zinc-600";
+  const cardClass = selected === value ? "w-full bg-zinc-800 border-0" : "w-full text-zinc-600 border border-zinc-600";
   return (
     <button
       type="button"
