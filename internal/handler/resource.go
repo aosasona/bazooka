@@ -14,7 +14,7 @@ type Resources struct {
 	Memory system.MemoryStats `json:"memory"`
 }
 
-func (h *Handler) getResources(c *fiber.Ctx) error {
+func (h *handler) getResources(c *fiber.Ctx) error {
 	res := response.New(c)
 
 	var (
