@@ -1,5 +1,7 @@
 # Bazooka 💣
 
+> STATUS: I am currently writing components for a rewrite under a new name (`Spectre`) into a desktop app (will also be available as a CLI; and definitely still a web app after for convenience), until then, development has halted for this version and package. I will open up the new version soon when it is ready but you can find core components like [tpmu](https://github.com/aosasona/tpmu) that I am still working on. I still use this often so I try to work on the new version when I can but I do not have a lot of time these days.
+
 ![Bazooka](./assets/screenshot.png)
 
 Bazooka is a simple tool in Go to find and kill processes on your machine by name or port. It provides a Web UI to view, find and kill processes without having to use the command line all in one binary.
